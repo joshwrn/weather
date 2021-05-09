@@ -1,4 +1,4 @@
-const getForecast = async (location = 'los angeles') => {
+const getForecast = async (location = 'san francisco') => {
   const response = await fetch(requestLocation(location), { mode: 'cors' });
   const weatherData = await response.json();
   const getFullWeather = await fetch(requestFullWeather(weatherData.coord), {
@@ -8,7 +8,7 @@ const getForecast = async (location = 'los angeles') => {
   return fullWeather;
 };
 
-const getCurrent = async (location = 'los angeles') => {
+const getCurrent = async (location = 'san francisco') => {
   const response = await fetch(requestLocation(location), { mode: 'cors' });
   const weatherData = await response.json();
   return weatherData;
