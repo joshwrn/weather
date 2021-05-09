@@ -27,6 +27,7 @@ ul {
 
 html {
   background-color: rgb(0, 0, 0);
+  background-size: cover;
 }
 
 @font-face {
@@ -37,6 +38,11 @@ html {
 body {
   color: white;
   font-family: blender;
+}
+
+:root {
+  --spin-animation: gradient 15s ease infinite;
+  --before-filters: blur(40px) opacity(50%);
 }
 
 /*! HEADER */
@@ -224,6 +230,7 @@ input:focus {
   height: 300px;
   background-size: 200% 200%;
   animation: gradient 15s ease infinite;
+  transform: translateZ(0);
 }
 
 /*+ GLOW */
@@ -233,24 +240,37 @@ input:focus {
     circle at -30%,
     hsl(221, 100%, 65%),
     hsl(239, 100%, 75%),
-    hsl(337, 100%, 75%)
+    hsl(271, 100%, 75%)
   );
   width: 300px;
   height: 300px;
   content: '';
   display: block;
-  filter: blur(40px) opacity(50%);
+  filter: var(--before-filters);
   position: absolute;
   z-index: -1;
   transition: 1s;
   background-size: 200% 200%;
-  animation: gradient 15s ease infinite;
+  transform: translateZ(0);
+  animation: var(--spin-animation);
+}
+
+#circle::after {
+  border-radius: 100%;
+  background: url(https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png);
+  width: 300px;
+  height: 300px;
+  content: '';
+  display: block;
+  opacity: 25%;
+  background-size: cover;
 }
 
 /*+ HOVER */
 #circle:hover::before {
-  animation: gradient 15s ease infinite, spin 1s linear infinite;
+  animation: var(--spin-animation);
   filter: blur(50px) opacity(80%);
+  transform: translateZ(0);
 }
 
 /*+ KEYFRAMES */
@@ -259,21 +279,24 @@ input:focus {
 @keyframes gradient {
   0% {
     background-position: 0% 50%;
+    transform: translateZ(0);
   }
   50% {
     background-position: 100% 50%;
+    transform: translateZ(0);
   }
   100% {
     background-position: 0% 50%;
+    transform: translateZ(0);
   }
 }
 
 /*@ SPIN */
 @keyframes spin {
   0% {
-    transform: rotate(0deg);
+    transform: translateZ(0) rotate(0deg);
   }
   100% {
-    transform: rotate(360deg);
+    transform: translateZ(0) rotate(360deg);
   }
 }
