@@ -1,4 +1,4 @@
-import { ui, search } from './ui';
+import { start, search } from './ui';
 
-ui();
+start();
 search();

@@ -41,7 +41,7 @@ body {
 }
 
 :root {
-  --spin-animation: gradient 15s ease infinite;
+  --spin-animation: '';
   --before-filters: blur(40px) opacity(50%);
 }
 
@@ -191,7 +191,7 @@ input:focus {
 
 #hourly-forecast {
   display: grid;
-  grid-template-columns: repeat(24, 1fr);
+  grid-template-columns: repeat(25, 1fr);
   margin-top: 1em;
   padding-bottom: 0.5em;
   width: 100%;
@@ -201,7 +201,9 @@ input:focus {
 }
 
 .hourly-cell {
-  width: fit-content;
+  width: 2.5em;
+  justify-items: center;
+  text-align: center;
 }
 
 #hourly-forecast::-webkit-scrollbar {
@@ -264,13 +266,6 @@ input:focus {
   display: block;
   opacity: 25%;
   background-size: cover;
-}
-
-/*+ HOVER */
-#circle:hover::before {
-  animation: var(--spin-animation);
-  filter: blur(50px) opacity(80%);
-  transform: translateZ(0);
 }
 
 /*+ KEYFRAMES */
