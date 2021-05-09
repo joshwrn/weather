@@ -32,7 +32,7 @@ html {
 
 @font-face {
   font-family: blender;
-  src: url(/dist/fonts/blender.ttf);
+  src: url(fonts/blender.ttf);
 }
 
 body {
