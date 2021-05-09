@@ -61,9 +61,19 @@ body {
   align-items: center;
 }
 
+#left-header {
+  display: flex;
+  align-items: center;
+  margin: 2em;
+  gap: 2em;
+}
+
+#sidebar-icon {
+  cursor: pointer;
+}
+
 /*? TITLE */
 #title {
-  margin: 2em;
   font-size: 1.2rem;
 }
 
@@ -307,7 +317,7 @@ input:focus {
     align-items: center;
   }
 
-  #title {
+  #left-header {
     margin: 2em 2em 0em 2em;
   }
 
