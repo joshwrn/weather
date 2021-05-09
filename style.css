@@ -321,6 +321,10 @@ input:focus {
     margin: 2em 2em 0em 2em;
   }
 
+  #input {
+    font-size: 16px;
+  }
+
   #center {
     display: flex;
     justify-content: center;
