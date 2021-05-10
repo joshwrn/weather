@@ -32,6 +32,32 @@
                 </i></div>
         </div>
     </div>
+    <!--+ SIDEBAR -->
+    <div id="sidebar">
+        <div id="sb-header">
+            <span id="sb-close" class="material-icons-outlined">
+                close
+            </span>
+            <p id="title">ODIN WEATHER</p>
+        </div>
+        <div id="sb-main">
+            <div class="sb-item" id="units">
+                <span class="material-icons-outlined">
+                    thermostat
+                </span>
+                <p>UNITS</p>
+            </div>
+            <div class="sb-item" id="theme">
+                <span class="material-icons-outlined">
+                    dark_mode
+                </span>
+                <p>THEME</p>
+            </div>
+        </div>
+        <div id="sb-footer">
+            <a href="https://twitter.com/joshwrn" target="_blank" id="about">Designed By Josh Warren</a>
+        </div>
+    </div>
     <!--+ CONTAINER -->
     <div id="center">
         <div id="container">
@@ -39,7 +65,7 @@
             <div id="details">
                 <div>
                     <div id="current-details">
-                        <i id="current-icon" class="fas fa-cloud-moon"></i>
+                        <i id="current-icon"></i>
                         <p id="current-temp">--°F</p>
                         <div id="current-peaks">
                             <p id="current-high">--°F</p>
@@ -47,16 +73,12 @@
                         </div>
                     </div>
                     <!--@ TIME/LOCATION -->
-                    <p id="time">11:55AM, FRI, JAN 5</p>
+                    <p id="time">--, --, -- --</p>
                     <p id="location">--</p>
                 </div>
                 <!--@ HOURLY FORECAST-->
                 <div id="hourly-forecast">
-                    <div class="hourly-cell" id="zero">
-                        <p class="hr-time">5PM</p>
-                        <i class="fas fa-cloud-moon"></i>
-                        <p class=hr-temp>50F</p>
-                    </div>
+
                 </div>
             </div>
             <!--@ CIRCLE -->

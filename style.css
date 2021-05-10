@@ -43,6 +43,8 @@ body {
 :root {
   --spin-animation: '';
   --before-filters: blur(40px) opacity(50%);
+  --before-transition: animation 1s, filter 1s;
+  --sidebar-items: translate(-300px);
 }
 
 /*! HEADER */
@@ -124,6 +126,112 @@ input:focus {
   padding-right: 10px;
   color: rgba(255, 255, 255, 0.5);
   cursor: pointer;
+}
+
+/*! SIDEBAR */
+
+#sidebar {
+  background: radial-gradient(
+    circle at -30%,
+    hsl(221, 100%, 65%),
+    hsl(239, 100%, 75%),
+    hsl(337, 100%, 75%)
+  );
+  background-size: 200% 200%;
+  top: 0;
+  position: fixed;
+  height: 100vh;
+  width: 0px;
+  border-right: 1px solid rgba(124, 124, 124, 0.281);
+  display: grid;
+  visibility: hidden;
+  grid-template-rows: 1fr 11fr 1fr;
+  z-index: 2;
+  justify-items: center;
+  transition: 1s;
+}
+
+/*+ BEFORE GLOW */
+#sidebar::before {
+  border-radius: 100%;
+  background: radial-gradient(
+    circle at -30%,
+    hsl(221, 100%, 65%),
+    hsl(239, 100%, 75%),
+    hsl(337, 100%, 59%)
+  );
+  width: inherit;
+  height: inherit;
+  content: '';
+  display: block;
+  filter: blur(80px) opacity(70%);
+  position: absolute;
+  z-index: -1;
+  background-size: 200% 200%;
+  transform: translateZ(0);
+}
+
+#sidebar::after {
+  background: url(https://upload.wikimedia.org/wikipedia/commons/7/76/1k_Dissolve_Noise_Texture.png);
+  width: inherit;
+  height: 100vh;
+  content: '';
+  display: block;
+  opacity: 10%;
+  position: absolute;
+  top: 0;
+  background-size: cover;
+  z-index: -1;
+}
+
+#sb-header {
+  margin-top: 2em;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  transform: var(--sidebar-items);
+  transition: 1.2s;
+}
+
+#sb-close {
+  cursor: pointer;
+}
+
+#sb-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding-top: 2em;
+  transform: var(--sidebar-items);
+  transition: 1.2s;
+}
+
+.sb-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  font-size: 1.2rem;
+  width: 200px;
+  height: 30px;
+  cursor: pointer;
+  border-radius: 1em;
+}
+
+.sb-item:hover {
+  background: rgba(255, 255, 255, 0.13);
+}
+
+#sb-footer {
+  transform: var(--sidebar-items);
+  transition: 1.2s;
+}
+
+#about {
+  text-decoration: none;
+  color: white;
+  font-size: 0.7rem;
 }
 
 /*! CENTER DIVS */
@@ -252,7 +360,7 @@ input:focus {
     circle at -30%,
     hsl(221, 100%, 65%),
     hsl(239, 100%, 75%),
-    hsl(271, 100%, 75%)
+    hsl(337, 100%, 59%)
   );
   width: 300px;
   height: 300px;
@@ -261,7 +369,7 @@ input:focus {
   filter: var(--before-filters);
   position: absolute;
   z-index: -1;
-  transition: 1s;
+  transition: var(--before-transition);
   background-size: 200% 200%;
   transform: translateZ(0);
   animation: var(--spin-animation);
