@@ -1,4 +1,4 @@
-import { changeUnits } from './ui';
+import { theme } from './theme';
 
 const root = document.documentElement;
 
@@ -43,6 +43,9 @@ const sidebarFunctions = () => {
       sbStatus = 'closed';
     }
   });
+
+  //+ THEME
+  theme();
 };
 
 export { sidebarFunctions };

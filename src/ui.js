@@ -108,12 +108,10 @@ const changeUnits = () => {
         currentUnits = 'metric';
         currentSymbol = 'C';
         getWeather(location.innerHTML, currentUnits);
-        console.log(currentUnits);
       } else if (currentUnits === 'metric') {
         currentUnits = 'imperial';
         currentSymbol = 'F';
         getWeather(location.innerHTML, currentUnits);
-        console.log(currentUnits);
       }
     }
   });
