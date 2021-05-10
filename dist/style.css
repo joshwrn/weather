@@ -37,7 +37,7 @@ html {
 
 body {
   color: var(--theme-color-two);
-  font-family: blender;
+  font-family: blender, sans-serif;
 }
 
 :root {
@@ -49,6 +49,7 @@ body {
   --theme-color-two: white;
   --sidebar-font-color: white;
   --theme-color-four: rgba(255, 255, 255, 0.5);
+  --search-error: '';
 }
 
 /*! HEADER */
@@ -97,6 +98,7 @@ body {
   margin: 2em;
   position: relative;
   z-index: 1;
+  animation: var(--search-error);
 }
 
 /*+ INPUT BOX */
@@ -321,6 +323,7 @@ input:focus {
   max-width: 600px;
   overflow-x: scroll;
   gap: 1em;
+  scrollbar-color: #0a4c95 #c2d2e4;
 }
 
 .hourly-cell {
@@ -416,6 +419,19 @@ input:focus {
   }
   100% {
     transform: translateZ(0) rotate(360deg);
+  }
+}
+
+/*@ SEARCH BOX ERROR */
+@keyframes shake {
+  0% {
+    transform: translate(0em);
+  }
+  50% {
+    transform: translate(-0.5em);
+  }
+  100% {
+    transform: translate(0em);
   }
 }
 

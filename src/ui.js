@@ -121,19 +121,26 @@ const changeUnits = () => {
 //? GET WEATHER
 const getWeather = async (value, units) => {
   loadingAnimation();
-  let current = await getCurrent(value, units);
-  let forecast = await getForecast(value, units);
-  setCurrentTemp(current);
-  setHighLow(current);
-  setLocation(current);
-  setTime(forecast.current.dt);
-  hourlyForecastDiv.innerHTML = '';
-  createAllCells(forecast);
-  restAnimation();
-  searchBoxInput.blur();
-  setCurrentIcon(current.weather[0].id, forecast.current.dt);
-  console.log(current);
-  console.log(forecast);
+  try {
+    let current = await getCurrent(value, units);
+    let forecast = await getForecast(value, units);
+    setCurrentTemp(current);
+    setHighLow(current);
+    setLocation(current);
+    setTime(forecast.current.dt);
+    hourlyForecastDiv.innerHTML = '';
+    createAllCells(forecast);
+    restAnimation();
+    searchBoxInput.blur();
+    setCurrentIcon(current.weather[0].id, forecast.current.dt);
+    console.log(current);
+    console.log(forecast);
+  } catch (e) {
+    root.style.setProperty('--search-error', 'shake 0.2s linear 4');
+    setTimeout(function () {
+      root.style.setProperty('--search-error', '');
+    }, 1000);
+  }
 };
 
 //? SET CURRENT
