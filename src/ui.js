@@ -24,6 +24,10 @@ const hourlyCell = document.querySelectorAll('hourly-cell');
 //@ CIRCLE
 const circle = document.getElementById('circle');
 
+//@ UNITS
+let currentUnits = 'imperial';
+let currentSymbol = 'F';
+
 //? ANIMATIONS
 //+ LOAD
 const loadingAnimation = () => {
@@ -52,24 +56,25 @@ const notTypingAnimation = () => {
 };
 
 //? UI
-//+INITIALIZE
+//@ INITIALIZE
 const start = () => {
-  getWeather();
+  getWeather('san francisco', currentUnits);
+  changeUnits();
 };
 
-//+ SEARCH
+//@ SEARCH
 const search = () => {
   //+ CLICK BUTTON
   document.addEventListener('click', async (e) => {
     if (e.target.matches('#search-button')) {
-      getWeather(searchBoxInput.value);
+      getWeather(searchBoxInput.value, currentUnits);
       searchBoxInput.value = '';
     }
   });
   //+ CLICK ENTER
   searchBoxInput.addEventListener('keydown', (e) => {
     if (e.keyCode === 13 && searchBoxInput.value !== '') {
-      getWeather(searchBoxInput.value);
+      getWeather(searchBoxInput.value, currentUnits);
       searchBoxInput.value = '';
     }
   });
@@ -95,16 +100,36 @@ const search = () => {
   });
 };
 
+//@ SET UNITS
+const changeUnits = () => {
+  document.addEventListener('click', (e) => {
+    if (e.target.matches('.units')) {
+      if (currentUnits === 'imperial') {
+        currentUnits = 'metric';
+        currentSymbol = 'C';
+        getWeather(location.innerHTML, currentUnits);
+        console.log(currentUnits);
+      } else if (currentUnits === 'metric') {
+        currentUnits = 'imperial';
+        currentSymbol = 'F';
+        getWeather(location.innerHTML, currentUnits);
+        console.log(currentUnits);
+      }
+    }
+  });
+};
+
 //! GET FUNCTIONS
-const getWeather = async (value) => {
+//? GET WEATHER
+const getWeather = async (value, units) => {
   loadingAnimation();
-  hourlyForecastDiv.innerHTML = '';
-  let current = await getCurrent(value);
-  let forecast = await getForecast(value);
+  let current = await getCurrent(value, units);
+  let forecast = await getForecast(value, units);
   setCurrentTemp(current);
   setHighLow(current);
   setLocation(current);
   setTime(forecast.current.dt);
+  hourlyForecastDiv.innerHTML = '';
   createAllCells(forecast);
   restAnimation();
   searchBoxInput.blur();
@@ -123,15 +148,15 @@ const setCurrentIcon = (id, unix) => {
 //+ CURRENT TEMP
 const setCurrentTemp = (temp) => {
   let num = Math.round(temp.main.temp);
-  currentTemp.innerHTML = `${num}°F`;
+  currentTemp.innerHTML = `${num}°${currentSymbol}`;
 };
 
 //+ MIN MAX TEMPS
 const setHighLow = (minMax) => {
   let getHigh = Math.round(minMax.main.temp_max);
   let getLow = Math.round(minMax.main.temp_min);
-  currentHigh.innerHTML = `${getHigh}°F`;
-  currentLow.innerHTML = `${getLow}°F`;
+  currentHigh.innerHTML = `${getHigh}°${currentSymbol}`;
+  currentLow.innerHTML = `${getLow}°${currentSymbol}`;
 };
 
 //+ SET LOCATION
@@ -286,7 +311,7 @@ const createCells = (unix, hrTemp, desc) => {
   let fullTime = `${hours}${period}`;
 
   //TEMP
-  let cellTemp = `${roundTemp(hrTemp)}°F`;
+  let cellTemp = `${roundTemp(hrTemp)}°${currentSymbol}`;
 
   //+ CREATE ELEMENTS
   //@ CELL
@@ -315,4 +340,4 @@ const createCells = (unix, hrTemp, desc) => {
   hourlyForecastDiv.appendChild(newCell);
 };
 
-export { start, search };
+export { start, search, changeUnits };
