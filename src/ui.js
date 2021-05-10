@@ -35,10 +35,20 @@ const restAnimation = () => {
   root.style.setProperty('--before-filters', 'blur(50px) opacity(50%)');
   root.style.setProperty('--spin-animation', '');
 };
+//+ FOCUS
+const focusAnimation = () => {
+  root.style.setProperty('--before-filters', 'blur(50px) opacity(80%)');
+  root.style.setProperty('--spin-animation', 'spin 1.5s linear infinite');
+};
 //+ TYPING
 const typingAnimation = () => {
+  root.style.setProperty('--before-transition', 'animation 1s, filter .2s');
+  root.style.setProperty('--before-filters', 'blur(65px) opacity(70%)');
+};
+//+ NOT TYPING
+const notTypingAnimation = () => {
+  root.style.setProperty('--before-transition', 'animation 1s, filter 1s');
   root.style.setProperty('--before-filters', 'blur(50px) opacity(80%)');
-  root.style.setProperty('--spin-animation', 'spin 2s linear infinite');
 };
 
 //? UI
@@ -65,11 +75,23 @@ const search = () => {
   });
   //+ ON FOCUS
   searchBoxInput.addEventListener('focus', () => {
-    typingAnimation();
+    focusAnimation();
   });
   //+ ON BLUR
   searchBoxInput.addEventListener('blur', () => {
     restAnimation();
+  });
+  //+ TYPING
+  searchBoxInput.addEventListener('keydown', (e) => {
+    if (e.keyCode !== 13) {
+      typingAnimation();
+    }
+  });
+  //+ NOT TYPING
+  searchBoxInput.addEventListener('keyup', (e) => {
+    if (e.keyCode !== 13) {
+      notTypingAnimation();
+    }
   });
 };
 
